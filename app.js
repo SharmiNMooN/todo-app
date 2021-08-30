@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const db = require("./config/db.js");
+const {connectDB} = require("./config/db.js");
 
-db.connectDB().then(()=>{
+connectDB().then(()=>{
 
     console.log("Database is connected");
 })
