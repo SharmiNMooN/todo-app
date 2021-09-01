@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const {connectDB} = require("./config/db.js");
-
+const todoRoute = require("./routes/todo.route");
 connectDB().then(()=>{
 
     console.log("Database is connected");
@@ -21,6 +21,7 @@ app.get("/",(req,res)=>{
         message: "WELCOME TO OUR TODO APPLICATION"
     })
 })
+app.use("/",todoRoute);
 
 
 

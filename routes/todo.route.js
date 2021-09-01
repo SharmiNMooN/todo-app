@@ -1,10 +1,26 @@
 const { Router } = require("express");
+const todoModel  = require("../model/todo.model.js")
 
 
 const router = Router();
 
 //api for save todo
 router.post('/api/v1.0.0/todos',async(req,res)=>{
+    const payload = req.body;
+    if(!payload.title){
+        return res.status(400).send({
+            success: false,
+            message: "title is required"
+        })
+    }
+
+    const createdTodo = await todoModel.create(payload);
+    return res.send({
+        success: true,
+        message: "Todo created  sucessfully",
+        data: createdTodo 
+    })
+
     
 });
 
@@ -32,3 +48,5 @@ router.patch('/api/v1.0.0/todos/:id',async(req,res)=>{
 router.delete('/api/v1.0.0/todos/:id',async(req,res)=>{
     
 });
+
+module.exports = router;
